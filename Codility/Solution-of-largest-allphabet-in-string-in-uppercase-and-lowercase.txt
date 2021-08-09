@@ -1,0 +1,62 @@
+/*
+given a string S consisting of N letters. we want to find the alphabatically largest 
+letter that occurs both in lowerecase and uppercase.or decide there is no such letter.
+
+NOTE: E is alphabatically larger than B 
+
+Write a function 
+String solution(String s){};
+
+and return the alphabetaically largest letter among both lower and uppercase in Uppercase.
+and if no such letter is present return "NO"
+*/
+
+
+import java.util.*;
+public class Main
+{
+    public static String solution(String s){
+        //created two different list for capital and small case letters
+        List<Character> smallchars = new ArrayList<>();
+        List<Character> capitalchars = new ArrayList<>();
+        
+        //seperating the capital and small case letters
+        for(int i=0;i<s.length();i++){
+            if(Character.isLowerCase(s.charAt(i)) && !smallchars.contains(s.charAt(i))){
+                //System.out.println(s.charAt(i));
+                smallchars.add(s.charAt(i));
+            }
+            else if(Character.isUpperCase(s.charAt(i)) && !capitalchars.contains(s.charAt(i))){
+                //System.out.println(s.charAt(i));
+                capitalchars.add(s.charAt(i));
+            }
+            
+        }
+        
+        char largest='A';
+        int count=0;
+        //finding the largest letter and returning that in Capital letters
+        for (int i = 0; i < smallchars.size(); i++){
+            if(capitalchars.contains(Character.toUpperCase(smallchars.get(i)))){
+                if(Character.toUpperCase(smallchars.get(i)) >= largest){
+                    largest=Character.toUpperCase(smallchars.get(i));
+                    count++;
+                }
+            }
+        }
+        
+        
+        //System.out.println("largest ="+lar);
+                
+        if(count==0){
+            return "NO";
+        }
+        else{
+            return ""+largest;
+        }
+    }
+	public static void main(String[] args) {
+		
+		System.out.println(solution("baEeaBabcDaA"));
+	}
+}
